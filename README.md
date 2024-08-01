@@ -19,7 +19,9 @@ The purpose of the workload was to learn how we can utilize the CICD pipeline to
 ### The "STEPS" taken (and why each was necessary/important)
 
 
-1. Using git to clone the project repo into local and pushing it to personal github
+1. ### <u> This step was necessary to copy the code into our github. Using fork would be faster but it will show that the code has been take from the Kura Labs account and this method helps to make sure that the code is owned by us. </u>
+
+Using git to clone the project repo into local and pushing it to personal github
 
 ```
 git clone https://github.com/kura-labs-org/C5-Deployment-Workload-1.git
@@ -47,15 +49,19 @@ git branch -M main
 git push -u origin main
 
 ```
-### <u> This step was necessary to copy the code into our github. Using fork would be faster but it will show that the code has been take from the Kura Labs account and this method helps to make sure that the code is owned by us. </u>
 
-2. Launch a new EC2 using Ubuntu and use t2.micro as it is free tier eligible.
+
+2. ### <u>This step is required so that we can use EC2 server to run Jenkins on.</u>
+
+Launch a new EC2 using Ubuntu and use t2.micro as it is free tier eligible.
 
 ![EC2 Launch Page](images/Launch_EC2.png)
 
-### <u>This step is required so that we can use EC2 server to run Jenkins on.</u>
 
-3. Install Jenkins onto the EC2
+
+3. ### <u>This steps helps to install and run Jenkins on the EC2 server. We can use this steps in the future when we want to deploy our application using Jenkins.</u>
+
+Install Jenkins onto the EC2
 
 	a. Connect to the EC2 terminal
 
@@ -79,10 +85,12 @@ If successful, the last command should show the Jenkins service “active (runni
 
 ![Image](images/ec2.png)
 
-### <u>This steps helps to install and run Jenkins on the EC2 server. We can use this steps in the future when we want to deploy our application using Jenkins.</u>
 
 
-4. To login to jenkins use the publicIPv4 address of the EC2 where you installed jenkins and paste it in the browser with port 8080.
+
+4. ### <u>Creating an admin user helps us to login every time we want to use Jenkins in the future.</u>
+
+To login to jenkins use the publicIPv4 address of the EC2 where you installed jenkins and paste it in the browser with port 8080.
 
 
 	a. Enter initial admin password : you can find the password in /var/jenkins_home/secrets/
@@ -95,9 +103,10 @@ If successful, the last command should show the Jenkins service “active (runni
 
 	c. Create first admin user
 
-### <u>Creating an admin user helps us to login every time we want to use Jenkins in the future.</u>
 
-5. Create a Multi-Branch pipeline
+
+5. ### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. This is necessary Jenkins will require permissions to deploy our code from GitHub</u>
+ Create a Multi-Branch pipeline
 
 	a. Click on “New Item” in the menu on the left of the page
 
@@ -129,9 +138,11 @@ v. Set an expiration date and then select the following "scopes": repo, admin:re
 
 This token can only be viewed ONCE! Make sure you enter the token properly (or save it) before leaving the page otherwise a new token must be generated!
 
-### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. This is necessary Jenkins will require permissions to deploy our code from GitHub</u>
 
-6. Connect GitHub repository to Jenkins
+
+6. ### <u> This step was to point the Jenkins pipeline to our GitHub Repo which has the code that need to be deployed. </u>
+
+Connect GitHub repository to Jenkins
 
 	a. Enter the repository HTTPS URL and click "Validate"
   
@@ -142,9 +153,11 @@ This token can only be viewed ONCE! Make sure you enter the token properly (or s
 ![pipeline1](images/pipeline1.png)
 
 
-### <u> This step was to point the Jenkins pipeline to our GitHub Repo which has the code that need to be deployed. </u>
 
-7. Download the contents of the repository and upload a zip file of the application it to AWS Elastic Beanstalk.
+
+7. ### <u> In this step we were able to quickly use AWS managed service Elastic Beanstalk to quickly deploy our application </u>
+
+Download the contents of the repository and upload a zip file of the application it to AWS Elastic Beanstalk.
   
 	a. First, follow the instructions in this [LINK](https://scribehow.com/shared/How_to_Create_an_AWS_IAM_Role_for_Elastic_Beanstalk_and_EC2__kTg4B7zRRxCp-aYTJc-WLg) for "How to Create an AWS IAM Role for Elastic Beanstalk and EC2" and create the two IAM roles as specified.
 
@@ -176,7 +189,7 @@ This token can only be viewed ONCE! Make sure you enter the token properly (or s
 
 ![Website](images/web_running.png)
 
-### <u> In this step we were able to quickly use AWS managed service Elastic Beanstalk to quickly deploy our application </u>
+
 
 
 ### "SYSTEM DESIGN DIAGRAM"
