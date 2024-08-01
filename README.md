@@ -1,19 +1,65 @@
 # Kura Labs Cohort 5- Deployment Workload 1
 ## Intro to CI/CD
 
-Welcome to Deployment Workload 1!  By now you’ve learned about system designs and the CI/CD Pipeline.  Let’s start putting it all together and see it in action.  
+## Table Of Contents
 
-Be sure to document each step in the process and explain WHY each step is important to the pipeline.
+- [PURPOSE](#purpose)
+- [STEPS And Why each was Necessary](#the-steps-taken-and-why-each-was-necessaryimportant)
+- [SYSTEM DESIGN DIAGRAM](#system-design-diagram)
+- [ISSUES and TROUBLESHOOTING](#issuestroubleshooting)
+- [OPTIMIZATION](#optimization)
+- [CONCLUSION](#conclusion)
 
-## Instructions
+### PURPOSE
 
-1. Clone this repository to your GitHub account
-2. Create an EC2
+The purpose of the workload was to learn how we can utilize the CICD pipeline to run different stages such as build and test. We can utilize this method in the future to deploy applications. We also learned how to utilize AWS managed service "Elastic Beanstalk" to quickly deploy application in a few simple steps.
 
-	a. Follow document: [AWS EC2 Quickstart Guide](https://github.com/kura-labs-org/AWS-EC2-Quick-Start-Guide/blob/main/AWS%20EC2%20Quick%20Start%20Guide.pdf) if needed
+
+
+### The "STEPS" taken (and why each was necessary/important)
+
+
+1. Using git to clone the project repo into local and pushing it to personal github
+
+```
+git clone https://github.com/kura-labs-org/C5-Deployment-Workload-1.git
+
+```
+Create a new empty folder on your desktop
+
+Copy all the contents of the repo: C5-Deployment-Workload-1 that we cloned
+
+Open the folder using VS Code or any other IDE
+
+Run the following Commands in the terminal of your IDE: 
+
+```
+git init
+git add .
+git commit -m "Added all workload files"
+```
+
+Create a new repository in GitHub, name it my_banking_app and run the following commands in your local folder. These will push your code from local to GitHub
+
+```
+git remote add origin https://github.com/dolmagrg123/my_banking_app.git
+git branch -M main
+git push -u origin main
+
+```
+### <u> This step was necessary to copy the code into our github. Using fork would be faster but it will show that the code has been take from the Kura Labs account and this method helps to make sure that the code is owned by us. </u>
+
+2. Launch a new EC2 using Ubuntu and use t2.micro as it is free tier eligible.
+
+![EC2 Launch Page](images/Launch_EC2.png)
+
+### <u>This step is required so that we can use EC2 server to run Jenkins on.</u>
+
 3. Install Jenkins onto the EC2
 
 	a. Connect to the EC2 terminal
+
+![EC2 Connect](images/connect_to_ec2.png)
 
  	b. Enter the following commands to install Jenkins:
 
@@ -30,13 +76,26 @@ Be sure to document each step in the process and explain WHY each step is import
 
 If successful, the last command should show the Jenkins service “active (running)”
 
-4. Log into Jenkins
 
-	a. Enter initial admin password
+![Image](images/ec2.png)
+
+### <u>This steps helps to install and run Jenkins on the EC2 server. We can use this steps in the future when we want to deploy our application using Jenkins.</u>
+
+
+4. To login to jenkins use the publicIPv4 address of the EC2 where you installed jenkins and paste it in the browser with port 8080.
+
+
+	a. Enter initial admin password : you can find the password in /var/jenkins_home/secrets/
+    
+    ```
+    cat /var/jenkins_home/secrets/initialAdminPassword
+    ```
 
 	b. Install suggested plugins
 
 	c. Create first admin user
+
+### <u>Creating an admin user helps us to login every time we want to use Jenkins in the future.</u>
 
 5. Create a Multi-Branch pipeline
 
@@ -70,6 +129,8 @@ v. Set an expiration date and then select the following "scopes": repo, admin:re
 
 This token can only be viewed ONCE! Make sure you enter the token properly (or save it) before leaving the page otherwise a new token must be generated!
 
+### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. This is necessary Jenkins will require permissions to deploy our code from GitHub</u>
+
 6. Connect GitHub repository to Jenkins
 
 	a. Enter the repository HTTPS URL and click "Validate"
@@ -78,9 +139,12 @@ This token can only be viewed ONCE! Make sure you enter the token properly (or s
   
 	c. Click "Save" and a build should start automatically
 
-Did the build stages successfully complete? If not, why? How did you resolve the issue?  What did each stage do?
+![pipeline1](images/pipeline1.png)
 
-7. After successfully completing the build (provide screenshot of successful build in documentation), download the contents of the repository (the one in your personal GitHub NOT the kuralabs repo!) and upload a zip file of the application it to AWS Elastic Beanstalk.
+
+### <u> This step was to point the Jenkins pipeline to our GitHub Repo which has the code that need to be deployed. </u>
+
+7. Download the contents of the repository and upload a zip file of the application it to AWS Elastic Beanstalk.
   
 	a. First, follow the instructions in this [LINK](https://scribehow.com/shared/How_to_Create_an_AWS_IAM_Role_for_Elastic_Beanstalk_and_EC2__kTg4B7zRRxCp-aYTJc-WLg) for "How to Create an AWS IAM Role for Elastic Beanstalk and EC2" and create the two IAM roles as specified.
 
@@ -110,18 +174,32 @@ Did the build stages successfully complete? If not, why? How did you resolve the
 
     n. When the "environment is successfully launched", click on the link provided in the "Domain" and confirm that the application has deployed!
 
-8. Document! All projects have documentation so that others can read and understand what was done and how it was done. Create a README.md file in your repository that describes:
+![Website](images/web_running.png)
 
-	a. The "PURPOSE" of the Workload, 
-	
-	b. The "STEPS" taken (and why each was necessary/important, 
-	
-	c. A "SYSTEM DESIGN DIAGRAM" that is created in draw.io, 
-	
-	d. "ISSUES/TROUBLESHOOTING" that may or may have occured, 
-	
-	e. An "OPTIMIZATION" section for that answers the question: What are the benefits of using managed services for cloud infrastructure?  What are some issues that a retail bank would face choosing this method of deployment and how would you address/resolve them? What are other disadvantages of using elastic beanstalk or similar managed services for deploying applications?
-	
-	f. A "CONCLUSION" statement as well as any other sections you feel like you want to include.
+### <u> In this step we were able to quickly use AWS managed service Elastic Beanstalk to quickly deploy our application </u>
 
-The README.md is a markdown file that has unique formatting.  Be sure to look up how to write in markdown or use a txt to markdown converter. 
+
+### "SYSTEM DESIGN DIAGRAM"
+	
+### "ISSUES/TROUBLESHOOTING"
+
+While Deploying the application using elastic beanstalk, we got an error of 502 bad gateway. Upon looking at the code that was uploaded in the Elastic Beanstalk, we realized the zipped file downloaded from github has a parent folder. So we zipped it again with only the files and reuploaded it to beanstalk and the application ran successfully.
+
+I had initally created a develop branch in my GitHub and when I tried to deploy the code, the EC2 crashed and I was unable to restart. I terminated the EC2 and created a new EC2. I also deleted the develop branch and only deployed the main branch and it ran successfully.
+
+### "OPTIMIZATION'
+
+Using managed services like elastic beanstalk can be very helpful to companies that do not have a large team. AWS takes care of scalibility, security and reliability of the application so that the developers can focus on the functional aspect of the software.
+
+Even though AWS manages the security of the application, it is upto the client to make sure their data is secure. AWS shared responsibility model defines that AWS takes care of the Security of the Cloud and Customer needs to take care of the Security in the Cloud. We can resolve it by encrypting data that are confidential and by properly following the security standards. 
+
+Other issues might be less control over infrastructure as we only deploy our code but AWS takes control of the complete infrastructure. We can resolve it by using providers that allow to work closely in discussing infrastructure options.
+
+To resolve such issues we can also use custom scripts/Infrastructure as Code tools like Terraform to quickly deploy our application which gives complete control over the application.
+
+
+	
+## "CONCLUSION"
+
+In a nutshell, this workload gave hands on practice to deploy a live application with few steps. We also learned about managed services in AWS and their advantages as well as disadvantage which was very beneficial.	
+
