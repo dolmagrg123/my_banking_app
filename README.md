@@ -63,11 +63,11 @@ Launch a new EC2 using Ubuntu and use t2.micro as it is free tier eligible.
 
 Install Jenkins onto the EC2
 
-	a. Connect to the EC2 terminal
+a. Connect to the EC2 terminal
 
 ![EC2 Connect](images/connect_to_ec2.png)
 
- 	b. Enter the following commands to install Jenkins:
+b. Enter the following commands to install Jenkins:
 
 ```
     $sudo apt update && sudo apt install fontconfig openjdk-17-jre software-properties-common && sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt install python3.7 python3.7-venv
@@ -93,36 +93,36 @@ If successful, the last command should show the Jenkins service “active (runni
 To login to jenkins use the publicIPv4 address of the EC2 where you installed jenkins and paste it in the browser with port 8080.
 
 
-	a. Enter initial admin password : you can find the password in /var/jenkins_home/secrets/
+a. Enter initial admin password : you can find the password in /var/jenkins_home/secrets/
     
     ```
     cat /var/jenkins_home/secrets/initialAdminPassword
     ```
 
-	b. Install suggested plugins
+b. Install suggested plugins
 
-	c. Create first admin user
+c. Create first admin user
 
 
 
 5. ### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. This is necessary Jenkins will require permissions to deploy our code from GitHub</u>
  Create a Multi-Branch pipeline
 
-	a. Click on “New Item” in the menu on the left of the page
+a. Click on “New Item” in the menu on the left of the page
 
-	b. Enter a name for your pipeline
+b. Enter a name for your pipeline
   
-    c. Select “Multibranch Pipeline”
+c. Select “Multibranch Pipeline”
   
-    d. Under “Branch Sources”, click “Add source” and select “GitHub”
+d. Under “Branch Sources”, click “Add source” and select “GitHub”
   
-    e. Click “+ Add” and select “Jenkins”
+e. Click “+ Add” and select “Jenkins”
   
-    f. Make sure “Kind” reads “Username and password”
+f. Make sure “Kind” reads “Username and password”
 
-    g. Under “Username”, enter your GitHub username
+g. Under “Username”, enter your GitHub username
 
-    h. Under “Password” ,enter your GitHub personal access token
+h. Under “Password” ,enter your GitHub personal access token
 
 To get the GitHub personal access token, first log into GitHub and click on your profile icon on the top right of the page.
 
@@ -144,11 +144,11 @@ This token can only be viewed ONCE! Make sure you enter the token properly (or s
 
 Connect GitHub repository to Jenkins
 
-	a. Enter the repository HTTPS URL and click "Validate"
+a. Enter the repository HTTPS URL and click "Validate"
   
-	b. Make sure that the "Build Configuration" section says "Mode: by Jenkinsfile" and "Script Path: Jenkinsfile"
+b. Make sure that the "Build Configuration" section says "Mode: by Jenkinsfile" and "Script Path: Jenkinsfile"
   
-	c. Click "Save" and a build should start automatically
+c. Click "Save" and a build should start automatically
 
 ![pipeline1](images/pipeline1.png)
 
@@ -159,33 +159,33 @@ Connect GitHub repository to Jenkins
 
 Download the contents of the repository and upload a zip file of the application it to AWS Elastic Beanstalk.
   
-	a. First, follow the instructions in this [LINK](https://scribehow.com/shared/How_to_Create_an_AWS_IAM_Role_for_Elastic_Beanstalk_and_EC2__kTg4B7zRRxCp-aYTJc-WLg) for "How to Create an AWS IAM Role for Elastic Beanstalk and EC2" and create the two IAM roles as specified.
+a. First, follow the instructions in this [LINK](https://scribehow.com/shared/How_to_Create_an_AWS_IAM_Role_for_Elastic_Beanstalk_and_EC2__kTg4B7zRRxCp-aYTJc-WLg) for "How to Create an AWS IAM Role for Elastic Beanstalk and EC2" and create the two IAM roles as specified.
 
-    b. Navigate to the AWS Elastic Beanstalk console page
+b. Navigate to the AWS Elastic Beanstalk console page
 
-    c. Navigate to the "Environments" page on the left side menu and click on "Create Environment"
+c. Navigate to the "Environments" page on the left side menu and click on "Create Environment"
 
-    d. Create a "Web server environment" and enter the an Application name (Environment name should auto populate after that)
+d. Create a "Web server environment" and enter the an Application name (Environment name should auto populate after that)
 
-    e. Choose "Python 3.7" as the "Managed platform"
+e. Choose "Python 3.7" as the "Managed platform"
 
-    f. "Upload your code" by choosing a "local file" and select the zipped application files you created earlier.
+f. "Upload your code" by choosing a "local file" and select the zipped application files you created earlier.
 
-    g. Under "Presets", make sure that "Single instance (free tier eligible) is selected and then click "Next"
+g. Under "Presets", make sure that "Single instance (free tier eligible) is selected and then click "Next"
 
-    h. Select the "Service role" and "EC2 profile" in the appropriate drop down menus and then click "Next"
+h. Select the "Service role" and "EC2 profile" in the appropriate drop down menus and then click "Next"
 
-    i. Select the default VPC and Subnet "us-east-1a" and then click "Next"
+i. Select the default VPC and Subnet "us-east-1a" and then click "Next"
 
-    j. Select "General Purpose (SSD) for "Root volume type" and assign it 10 GB.
+j. Select "General Purpose (SSD) for "Root volume type" and assign it 10 GB.
 
-    k. Ensure that "Single instance" is selected for the "Environment type" and that ONLY "t3.micro" is selected for instance types (remove all others if present) and then click "Next"
+k. Ensure that "Single instance" is selected for the "Environment type" and that ONLY "t3.micro" is selected for instance types (remove all others if present) and then click "Next"
 
-    l. Select 'BASIC' health reporting under the monitoring section. NOT "ENHANCED"!
+l. Select 'BASIC' health reporting under the monitoring section. NOT "ENHANCED"!
 
-    m. Continue to the "Review" page and then click "Submit".
+m. Continue to the "Review" page and then click "Submit".
 
-    n. When the "environment is successfully launched", click on the link provided in the "Domain" and confirm that the application has deployed!
+n. When the "environment is successfully launched", click on the link provided in the "Domain" and confirm that the application has deployed!
 
 ![Website](images/web_running.png)
 
