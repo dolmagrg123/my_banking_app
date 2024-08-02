@@ -19,7 +19,7 @@ The purpose of the workload was to learn how we can utilize the CICD pipeline to
 ### The "STEPS" taken (and why each was necessary/important)
 
 
-1. ### <u> This step was necessary to copy the code into our github. Using fork would be faster but it will show that the code has been take from the Kura Labs account and this method helps to make sure that the code is owned by us. </u>
+1. ### <u> This step was necessary to copy the code into our GitHub. Using fork would be faster but it will show that the code has been take from the Kura Labs account and this method helps to make sure that the code is owned by us. GitHub is a critical tool for collaboration for software development. GitHub uses git for version control.  </u>
 
 Using git to clone the project repo into local and pushing it to personal github
 
@@ -51,7 +51,7 @@ git push -u origin main
 ```
 
 
-2. ### <u>This step is required so that we can use EC2 server to run Jenkins on.</u>
+2. ### <u>This step is required so that we can use EC2 server to run Jenkins on. EC2 servers help with compute.</u>
 
 Launch a new EC2 using Ubuntu and use t2.micro as it is free tier eligible.
 
@@ -105,7 +105,8 @@ c. Create first admin user
 
 
 
-5. ### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. This is necessary Jenkins will require permissions to deploy our code from GitHub</u>
+5. ### <u> In this step we are creating Jenkins pipeline and connecting it to our GitHub. Jenkins is an open-source tool that can be used to implement CICD for our application. In this step we are providing Jenkins permissions to access our GitHub Account</u>
+
  Create a Multi-Branch pipeline
 
 a. Click on “New Item” in the menu on the left of the page
