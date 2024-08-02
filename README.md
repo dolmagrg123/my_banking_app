@@ -189,10 +189,8 @@ Download the contents of the repository and upload a zip file of the application
 
 ![Website](images/web_running.png)
 
-
-
-
 ### "SYSTEM DESIGN DIAGRAM"
+![Design](images/system_design.png)
 	
 ### "ISSUES/TROUBLESHOOTING"
 
